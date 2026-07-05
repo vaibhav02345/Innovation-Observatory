@@ -1,15 +1,15 @@
 import React from 'react';
 
 const members = [
-  { name: "Vaibhav Pathak", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vaibhav&backgroundColor=ffdfbf" },
-  { name: "Akshat", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Akshat&backgroundColor=c0aede" },
-  { name: "Lovelesh Pathak", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lovelesh&backgroundColor=d1d4f9" },
-  { name: "Madhav Dixit", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Madhav&backgroundColor=b6e3f4" },
-  { name: "Agrim Goel", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Agrim&backgroundColor=ffdfbf" },
-  { name: "Lacky Mishra", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lacky&backgroundColor=c0aede" },
-  { name: "Harsh Gupta", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Harsh&backgroundColor=d1d4f9" },
-  { name: "Soumya Srivastava", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Soumya&backgroundColor=ffdfbf" },
-  { name: "Aarohi Gupta", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aarohi&backgroundColor=c0aede" },
+  { name: "Vaibhav Pathak", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Akshat", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Lovelesh Pathak", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Madhav Dixit", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Agrim Goel", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Lacky Mishra", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Harsh Gupta", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Soumya Srivastava", role: "Core Team", emoji: "👩‍💻" },
+  { name: "Aarohi Gupta", role: "Core Team", emoji: "👩‍💻" },
 ];
 
 const Team: React.FC = () => {
@@ -21,14 +21,12 @@ const Team: React.FC = () => {
       
       <div className="px-6 lg:px-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px bg-text-secondary/10 border border-text-secondary/10">
         {members.map((member, i) => (
-          <div key={i} className="bg-background aspect-square relative group overflow-hidden">
-            <img 
-              src={member.img} 
-              alt={member.name} 
-              className="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-110" 
-            />
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity p-4 lg:p-8 flex flex-col justify-end">
-              <div className="text-[9px] lg:text-xs font-mono text-accent mb-1 lg:mb-2">{member.role}</div>
+          <div key={i} className="bg-background aspect-square relative group overflow-hidden flex flex-col items-center justify-center border border-text-secondary/10 hover:bg-surface/50 transition-colors">
+            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">
+              {member.emoji}
+            </div>
+            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end">
+              <div className="text-[9px] lg:text-xs font-mono text-accent mb-1">{member.role}</div>
               <div className="text-sm lg:text-lg font-satoshi font-bold uppercase">{member.name}</div>
             </div>
           </div>
