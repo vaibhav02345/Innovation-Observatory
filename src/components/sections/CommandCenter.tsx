@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useJoinModal } from '../../context/JoinModalContext';
 
 const commands = [
   { type: 'cmd', text: "> ecell-init --boot" },
@@ -20,6 +21,7 @@ const commands = [
 const CommandCenter: React.FC = () => {
   const [visibleLines, setVisibleLines] = useState<typeof commands>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { openModal } = useJoinModal();
 
   useEffect(() => {
     let currentIndex = 0;
@@ -78,7 +80,10 @@ const CommandCenter: React.FC = () => {
         
         {/* Footer actions */}
         <div className="p-6 sm:p-8 lg:p-12 pt-0 border-t border-text-secondary/10 bg-surface/50 shrink-0">
-          <button className="bg-accent text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 uppercase font-bold text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] hover:bg-white transition-colors duration-300 w-full sm:w-auto mt-4">
+          <button 
+            onClick={openModal}
+            className="bg-accent text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 uppercase font-bold text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] hover:bg-white transition-colors duration-300 w-full sm:w-auto mt-4"
+          >
             Join the E-Cell
           </button>
         </div>

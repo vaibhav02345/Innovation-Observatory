@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useJoinModal } from '../../context/JoinModalContext';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { openModal } = useJoinModal();
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 border-b border-text-secondary/20 bg-background/80 backdrop-blur-md">
@@ -29,7 +31,10 @@ const Navbar: React.FC = () => {
         </nav>
         
         <div className="hidden lg:flex lg:col-span-3 h-full items-center justify-center px-4">
-          <button className="group relative w-full lg:w-auto px-6 lg:px-8 py-3 overflow-hidden border border-accent text-accent uppercase text-[10px] tracking-[0.3em] font-medium transition-none">
+          <button 
+            onClick={openModal}
+            className="group relative w-full lg:w-auto px-6 lg:px-8 py-3 overflow-hidden border border-accent text-accent uppercase text-[10px] tracking-[0.3em] font-medium transition-none"
+          >
             <span className="relative z-10 group-hover:text-black">Join Movement</span>
             <div className="absolute inset-0 bg-accent -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
           </button>
@@ -45,7 +50,10 @@ const Navbar: React.FC = () => {
             <a href="#projects" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Projects</a>
             <a href="#team" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Team</a>
           </nav>
-          <button className="w-full py-4 border border-accent text-accent uppercase text-[12px] tracking-[0.3em] font-medium hover:bg-accent hover:text-black transition-colors">
+          <button 
+            onClick={() => { setIsOpen(false); openModal(); }}
+            className="w-full py-4 border border-accent text-accent uppercase text-[12px] tracking-[0.3em] font-medium hover:bg-accent hover:text-black transition-colors"
+          >
             Join Movement
           </button>
         </div>
