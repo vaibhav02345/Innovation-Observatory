@@ -109,7 +109,7 @@ const Framework: React.FC = () => {
            <div ref={mobileProgressRef} className="w-full bg-accent rounded-full"></div>
         </div>
         
-        <div className="relative z-10 flex flex-col space-y-16 md:space-y-0 md:block w-full">
+        <div className="relative z-10 flex flex-col space-y-16 md:space-y-0 md:block w-full md:h-full">
           {steps.map((step, i) => {
             const Icon = step.icon;
             
