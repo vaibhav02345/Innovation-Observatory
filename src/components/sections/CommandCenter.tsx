@@ -2,16 +2,19 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useJoinModal } from '../../context/JoinModalContext';
 
 const commands = [
-  { type: 'cmd', text: "> fetch core_team" },
-  { type: 'out', text: "Vaibhav Pathak" },
-  { type: 'out', text: "Akshat" },
-  { type: 'out', text: "Lovelesh Pathak" },
-  { type: 'out', text: "Madhav Dixit" },
-  { type: 'out', text: "Agrim Goel" },
-  { type: 'out', text: "Lacky Mishra" },
-  { type: 'out', text: "Harsh Gupta" },
-  { type: 'out', text: "Soumya Srivastava" },
-  { type: 'out', text: "Aarohi Gupta" },
+  { type: 'cmd', text: "> ecell-init --boot" },
+  { type: 'out', text: "Booting E-Cell Entrepreneurship sequence... [OK]" },
+  { type: 'out', text: "Loading founder mindset modules... [OK]" },
+  { type: 'out', text: "Connecting to ecosystem mentors... [ESTABLISHED]" },
+  { type: 'cmd', text: "> run discover-problems.sh" },
+  { type: 'out', text: "Scanning for real-world challenges... [142 FOUND]" },
+  { type: 'cmd', text: "> execute build-startup.exe" },
+  { type: 'out', text: "Compiling vision into reality... [DEPLOYED]" },
+  { type: 'cmd', text: "> cat mission.txt" },
+  { type: 'out', text: "\"We don't teach students what to build.\"" },
+  { type: 'out', text: "\"We teach them how to discover what deserves to be built.\"" },
+  { type: 'cmd', text: "> systemctl status ecosystem" },
+  { type: 'out', text: "Ecosystem is thriving. Impact vectors nominal." },
   { type: 'cmd', text: "> clear" }
 ];
 
