@@ -99,8 +99,8 @@ const Framework: React.FC = () => {
         {/* Desktop Vertical S-Curve SVG */}
         <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none hidden md:block">
            <svg width="100%" height="100%" viewBox="0 0 1000 1200" preserveAspectRatio="none" className="overflow-visible">
-              <path d="M 600,60 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
-              <path ref={progressLineRef} d="M 600,60 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
+              <path d="M 600,0 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
+              <path ref={progressLineRef} d="M 600,0 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
            </svg>
         </div>
         
@@ -114,9 +114,9 @@ const Framework: React.FC = () => {
             const Icon = step.icon;
             
             // X: 60%, 40%, 60%, 40%, 60%
-            // Y: 5%, 27%, 50%, 73%, 95%
+            // Y: 0%, 27%, 50%, 73%, 95%
             const desktopPositions = [
-              "md:left-[60%] md:top-[5%]",
+              "md:left-[60%] md:top-[0%]",
               "md:left-[40%] md:top-[27%]",
               "md:left-[60%] md:top-[50%]",
               "md:left-[40%] md:top-[73%]",
