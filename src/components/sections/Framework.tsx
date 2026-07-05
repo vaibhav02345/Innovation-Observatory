@@ -99,8 +99,8 @@ const Framework: React.FC = () => {
         {/* Desktop Vertical S-Curve SVG */}
         <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none hidden md:block">
            <svg width="100%" height="100%" viewBox="0 0 1000 1200" preserveAspectRatio="none" className="overflow-visible">
-              <path d="M 700,60 C 600,150 300,200 300,324 C 300,450 700,450 700,600 C 700,750 300,750 300,876 C 300,1000 700,1050 700,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
-              <path ref={progressLineRef} d="M 700,60 C 600,150 300,200 300,324 C 300,450 700,450 700,600 C 700,750 300,750 300,876 C 300,1000 700,1050 700,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
+              <path d="M 600,60 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
+              <path ref={progressLineRef} d="M 600,60 C 550,150 400,200 400,324 C 400,450 600,450 600,600 C 600,750 400,750 400,876 C 400,1000 600,1050 600,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
            </svg>
         </div>
         
@@ -113,24 +113,24 @@ const Framework: React.FC = () => {
           {steps.map((step, i) => {
             const Icon = step.icon;
             
-            // X: 70%, 30%, 70%, 30%, 70%
+            // X: 60%, 40%, 60%, 40%, 60%
             // Y: 5%, 27%, 50%, 73%, 95%
             const desktopPositions = [
-              "md:left-[70%] md:top-[5%]",
-              "md:left-[30%] md:top-[27%]",
-              "md:left-[70%] md:top-[50%]",
-              "md:left-[30%] md:top-[73%]",
-              "md:left-[70%] md:top-[95%]"
+              "md:left-[60%] md:top-[5%]",
+              "md:left-[40%] md:top-[27%]",
+              "md:left-[60%] md:top-[50%]",
+              "md:left-[40%] md:top-[73%]",
+              "md:left-[60%] md:top-[95%]"
             ];
             
-            // For nodes at 30%, text is on right. For nodes at 70%, text is on left.
+            // For nodes at 40%, text is on right. For nodes at 60%, text is on left.
             const isTextOnRight = i % 2 !== 0;
 
             return (
               <div 
                 key={i}
                 ref={el => nodesRef.current[i] = el}
-                className={`flex items-center transition-all w-full md:absolute md:-translate-x-1/2 md:-translate-y-1/2 flex-row ${desktopPositions[i]} ${isTextOnRight ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                className={`flex items-center transition-all w-full md:w-[96px] md:h-[96px] md:absolute md:-translate-x-1/2 md:-translate-y-1/2 ${desktopPositions[i]} z-20`}
               >
                 {/* Mobile specific Number Node (hidden on desktop) */}
                 <div className="md:hidden node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[40px] h-[40px] flex items-center justify-center bg-background z-20 transition-colors duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] mr-6">
@@ -138,8 +138,8 @@ const Framework: React.FC = () => {
                 </div>
 
                 {/* Center Node (Icon) */}
-                <div className="flex flex-col md:flex-row items-center relative z-20">
-                  <div className="node-circle w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-full bg-[#0a0a0a] border-[3px] md:border-[6px] border-[#111] text-text-secondary flex items-center justify-center transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden group hover:border-accent/50 cursor-pointer">
+                <div className="flex relative items-center justify-center w-16 h-16 md:w-24 md:h-24 shrink-0">
+                  <div className="node-circle w-full h-full rounded-full bg-[#0a0a0a] border-[3px] md:border-[6px] border-[#111] text-text-secondary flex items-center justify-center transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden group hover:border-accent/50 cursor-pointer">
                     <div className="absolute inset-1 rounded-full border-2 border-text-secondary/10 pointer-events-none"></div>
                     <div className="absolute inset-0 flex items-center justify-center rotate-45 opacity-20 pointer-events-none">
                       <div className="w-full h-[2px] bg-text-secondary absolute"></div>
@@ -151,24 +151,24 @@ const Framework: React.FC = () => {
                   </div>
                   
                   {/* Desktop Number floating above icon */}
-                  <div className={`hidden md:flex absolute -top-4 ${isTextOnRight ? '-left-4' : '-right-4'} node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[40px] h-[40px] items-center justify-center bg-background z-30 transition-colors duration-500`}>
+                  <div className={`hidden md:flex absolute -top-3 ${isTextOnRight ? '-left-3' : '-right-3'} node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[36px] h-[36px] items-center justify-center bg-background z-30 transition-colors duration-500`}>
                     {i+1}
                   </div>
                 </div>
 
-                {/* Text Layout (points inward toward center to avoid intersecting line) */}
-                <div className={`flex w-full md:w-[400px] ${isTextOnRight ? 'justify-start pl-6 md:pl-8' : 'justify-end pr-6 md:pr-8 hidden md:flex'}`}>
+                {/* Desktop Text Layout (Absolute positioned to prevent widening the wrapper) */}
+                <div className={`hidden md:flex absolute top-1/2 -translate-y-1/2 w-[280px] lg:w-[400px] ${isTextOnRight ? 'left-full pl-6 lg:pl-10 justify-start' : 'right-full pr-6 lg:pr-10 justify-end'}`}>
                   <div className={`flex flex-col ${isTextOnRight ? 'text-left' : 'text-right'}`}>
-                    <span className="text-xl md:text-3xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
+                    <span className="text-xl lg:text-3xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
                       {step.title}
                     </span>
-                    <span className={`text-sm md:text-base text-text-secondary font-inter leading-relaxed max-w-sm ${isTextOnRight ? 'mr-auto' : 'ml-auto'}`}>
+                    <span className="text-sm lg:text-base text-text-secondary font-inter leading-relaxed">
                       {step.sub}
                     </span>
                   </div>
                 </div>
                 
-                {/* Mobile Text (hidden on Desktop) */}
+                {/* Mobile Text (Standard flex layout) */}
                 <div className="flex flex-col md:hidden w-full ml-6">
                   <span className="text-xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
                     {step.title}
