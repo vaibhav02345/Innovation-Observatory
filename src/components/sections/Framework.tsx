@@ -14,37 +14,19 @@ const steps = [
 ];
 
 const Framework: React.FC = () => {
-  const progressRefDesktop = useRef<SVGPathElement>(null);
-  const progressRefMobile = useRef<HTMLDivElement>(null);
+  const progressLineRef = useRef<HTMLDivElement>(null);
   const nodesRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Desktop vertical S-curve drawing
-    if (progressRefDesktop.current) {
-      const length = progressRefDesktop.current.getTotalLength();
-      gsap.set(progressRefDesktop.current, { strokeDasharray: length, strokeDashoffset: length });
-      
-      gsap.to(progressRefDesktop.current, {
-        scrollTrigger: {
-          trigger: '#framework-container',
-          start: "top 50%",
-          end: "bottom 80%",
-          scrub: 0.5
-        },
-        strokeDashoffset: 0,
-        ease: "none"
-      });
-    }
-
-    // Mobile straight line drawing
-    if (progressRefMobile.current) {
-      gsap.fromTo(progressRefMobile.current, 
+    // Vertical straight line drawing
+    if (progressLineRef.current) {
+      gsap.fromTo(progressLineRef.current, 
         { height: "0%" },
         {
           height: "100%",
           scrollTrigger: {
             trigger: '#framework-container',
-            start: "top 60%",
+            start: "top 50%",
             end: "bottom 80%",
             scrub: 0.5
           },
@@ -94,71 +76,53 @@ const Framework: React.FC = () => {
         <div className="text-4xl sm:text-5xl lg:text-7xl font-satoshi font-bold tracking-tighter uppercase mb-6">A simple journey<br />from observation<br /><span className="text-accent">to impact.</span></div>
       </div>
       
-      <div id="framework-container" className="relative w-full max-w-6xl mx-auto px-6 py-10 md:py-20 md:h-[1200px]">
+      <div id="framework-container" className="relative w-full max-w-4xl mx-auto px-6 py-10">
         
-        {/* Desktop Vertical S-Curve connecting line */}
-        <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none hidden md:block">
-           <svg width="100%" height="100%" viewBox="0 0 1000 1200" preserveAspectRatio="none" className="overflow-visible">
-              <path d="M 500,0 C 800,200 800,300 500,450 C 200,600 200,700 500,850 C 800,1000 800,1100 500,1200" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
-              <path ref={progressRefDesktop} d="M 500,0 C 800,200 800,300 500,450 C 200,600 200,700 500,850 C 800,1000 800,1100 500,1200" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
-           </svg>
+        {/* Vertical straight strip */}
+        <div className="absolute top-10 bottom-10 left-[48px] md:left-[80px] w-1 z-0 bg-text-secondary/10 rounded-full">
+           <div ref={progressLineRef} className="w-full bg-accent rounded-full"></div>
         </div>
         
-        {/* Mobile straight line */}
-        <div className="absolute top-10 bottom-10 left-[48px] w-1 z-0 pointer-events-none md:hidden bg-text-secondary/10">
-           <div ref={progressRefMobile} className="w-full bg-accent rounded-full"></div>
-        </div>
-        
-        <div className="relative z-10 flex flex-col space-y-16 md:space-y-0 md:block w-full">
+        <div className="relative z-10 flex flex-col space-y-16 w-full">
           {steps.map((step, i) => {
             const Icon = step.icon;
-            // Alternating left/right positions for desktop
-            const desktopClasses = [
-              "md:absolute md:top-[0%] md:left-[50%] md:-translate-x-1/2",
-              "md:absolute md:top-[22%] md:left-[75%] md:-translate-x-1/2",
-              "md:absolute md:top-[44%] md:left-[50%] md:-translate-x-1/2",
-              "md:absolute md:top-[66%] md:left-[25%] md:-translate-x-1/2",
-              "md:absolute md:top-[88%] md:left-[50%] md:-translate-x-1/2",
-            ];
 
             return (
               <div 
                 key={i}
                 ref={el => nodesRef.current[i] = el}
-                className={`flex flex-row md:flex-col items-center transition-all w-full md:w-auto ${desktopClasses[i]}`}
+                className="flex flex-row items-center transition-all w-full"
               >
-                {/* Mobile specific number indicator (hidden on desktop) */}
-                <div className="md:hidden text-accent font-mono text-xs font-bold border-2 border-accent rounded-full min-w-[24px] h-[24px] flex items-center justify-center bg-background mr-6 z-20">
+                {/* Timeline Number Node */}
+                <div className="node-num text-accent font-mono text-sm md:text-lg font-bold border-2 border-accent rounded-full min-w-[40px] md:min-w-[56px] h-[40px] md:h-[56px] flex items-center justify-center bg-background z-20 mr-6 md:mr-12 transition-colors duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                   {i+1}
                 </div>
 
-                <div className="flex flex-col items-center flex-1 md:flex-none">
-                  <div className="hidden md:flex node-num text-accent font-mono text-sm mb-4 font-bold border-2 border-accent rounded-full w-8 h-8 items-center justify-center bg-background transition-colors duration-500 z-20">
-                    0{i+1}
-                  </div>
-                  
-                  {/* Car Wheel styling */}
-                  <div className="node-circle w-20 h-20 md:w-32 md:h-32 shrink-0 rounded-full bg-[#0a0a0a] border-[4px] md:border-[8px] border-[#111] text-text-secondary flex items-center justify-center mb-0 md:mb-6 transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden group hover:border-accent/50 cursor-pointer">
-                    <div className="absolute inset-1 rounded-full border-2 md:border-4 border-text-secondary/10 pointer-events-none"></div>
-                    
-                    <div className="absolute inset-0 flex items-center justify-center rotate-45 opacity-20 pointer-events-none">
-                      <div className="w-full h-[2px] md:h-1 bg-text-secondary absolute"></div>
-                      <div className="h-full w-[2px] md:h-1 bg-text-secondary absolute"></div>
+                <div className="flex flex-col flex-1">
+                  <div className="flex flex-col md:flex-row items-start md:items-center">
+                    {/* Car Wheel styling */}
+                    <div className="node-circle w-16 h-16 md:w-24 md:h-24 shrink-0 rounded-full bg-[#0a0a0a] border-[3px] md:border-[6px] border-[#111] text-text-secondary flex items-center justify-center mb-4 md:mb-0 md:mr-8 transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden group hover:border-accent/50 cursor-pointer">
+                      <div className="absolute inset-1 rounded-full border-2 border-text-secondary/10 pointer-events-none"></div>
+                      
+                      <div className="absolute inset-0 flex items-center justify-center rotate-45 opacity-20 pointer-events-none">
+                        <div className="w-full h-[2px] bg-text-secondary absolute"></div>
+                        <div className="h-full w-[2px] bg-text-secondary absolute"></div>
+                      </div>
+                      
+                      <div className="absolute inset-2 md:inset-3 rounded-full border border-text-secondary/30 flex items-center justify-center bg-surface z-10">
+                        <Icon className="w-5 h-5 md:w-8 md:h-8 z-20 group-hover:scale-110 group-hover:text-accent transition-transform duration-300" />
+                      </div>
                     </div>
                     
-                    <div className="absolute inset-3 md:inset-4 rounded-full border border-text-secondary/30 flex items-center justify-center bg-surface z-10">
-                      <Icon className="w-6 h-6 md:w-10 md:h-10 z-20 group-hover:scale-110 group-hover:text-accent transition-transform duration-300" />
+                    <div className="flex flex-col w-full">
+                      <span className="text-xl md:text-3xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
+                        {step.title}
+                      </span>
+                      <span className="text-sm md:text-base text-text-secondary font-inter leading-relaxed max-w-md">
+                        {step.sub}
+                      </span>
                     </div>
                   </div>
-                </div>
-
-                <div className="ml-6 md:ml-0 flex flex-col md:items-center w-full max-w-[200px] md:max-w-[250px] md:mt-2">
-                  <span className="text-lg md:text-2xl font-satoshi font-bold uppercase mb-2 md:mb-4 md:text-center tracking-widest text-text-primary bg-background/80 backdrop-blur-md px-4 py-2 rounded-lg text-left w-full md:w-auto z-20">
-                    {step.title}
-                  </span>
-                  <span className="text-xs md:text-sm text-text-secondary md:text-center font-inter leading-relaxed bg-background/80 backdrop-blur-md px-4 py-2 rounded-lg text-left w-full md:w-auto z-20">
-                    {step.sub}
-                  </span>
                 </div>
               </div>
             );
