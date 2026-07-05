@@ -1,15 +1,15 @@
 import React from 'react';
 
 const members = [
-  { name: "Vaibhav Pathak", role: "Core Team", img: "/logo.png" },
-  { name: "Akshat", role: "Core Team", img: "/logo.png" },
-  { name: "Lovelesh Pathak", role: "Core Team", img: "/logo.png" },
-  { name: "Madhav Dixit", role: "Core Team", img: "/logo.png" },
-  { name: "Agrim Goel", role: "Core Team", img: "/logo.png" },
-  { name: "Lacky Mishra", role: "Core Team", img: "/logo.png" },
-  { name: "Harsh Gupta", role: "Core Team", img: "/logo.png" },
-  { name: "Soumya Srivastava", role: "Core Team", img: "/logo.png" },
-  { name: "Aarohi Gupta", role: "Core Team", img: "/logo.png" },
+  { name: "Vaibhav Pathak", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vaibhav&backgroundColor=ffdfbf" },
+  { name: "Akshat", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Akshat&backgroundColor=c0aede" },
+  { name: "Lovelesh Pathak", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lovelesh&backgroundColor=d1d4f9" },
+  { name: "Madhav Dixit", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Madhav&backgroundColor=b6e3f4" },
+  { name: "Agrim Goel", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Agrim&backgroundColor=ffdfbf" },
+  { name: "Lacky Mishra", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lacky&backgroundColor=c0aede" },
+  { name: "Harsh Gupta", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Harsh&backgroundColor=d1d4f9" },
+  { name: "Soumya Srivastava", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Soumya&backgroundColor=ffdfbf" },
+  { name: "Aarohi Gupta", role: "Core Team", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aarohi&backgroundColor=c0aede" },
 ];
 
 const Team: React.FC = () => {

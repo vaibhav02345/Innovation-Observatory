@@ -5,11 +5,8 @@ import Team from '../components/sections/Team';
 
 const TeamPage: React.FC = () => {
   return (
-    <div className="bg-background text-text-primary font-inter min-h-screen relative overflow-x-hidden">
+    <div className="bg-background text-text-primary font-inter min-h-screen relative overflow-x-hidden pt-20">
       <Navbar />
-      <div className="pt-40 pb-10 text-center">
-         <img src="/logo.png" alt="Logo" className="h-24 mx-auto mb-8 opacity-80" />
-      </div>
       <Team />
       <Footer />
     </div>
