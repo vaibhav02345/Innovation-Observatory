@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eye, Lightbulb, ClipboardCheck, Rocket, Flag } from 'lucide-react';
@@ -53,7 +53,7 @@ const Framework = () => {
       });
 
       // 2. Animate nodes popping in and highlighting
-      nodesRef.current.forEach((node, i) => {
+      nodesRef.current.forEach((node) => {
         if (!node) return;
         
         // Node container fade/slide up
