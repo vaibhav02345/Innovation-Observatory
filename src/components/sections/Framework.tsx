@@ -69,8 +69,8 @@ const Framework: React.FC = () => {
     });
   }, []);
 
-  // Use staggered offsets to make them flow smoothly along the curve path
-  const yOffsets = [0, 40, 120, 200, 280];
+  // Use a sine-wave offset to make them flow smoothly along an S-curve path
+  const yOffsets = [150, 0, 150, 300, 150];
 
   return (
     <section id="framework" className="relative py-20 lg:py-40 bg-surface/20 border-t border-b border-text-secondary/20 overflow-hidden">
@@ -80,13 +80,13 @@ const Framework: React.FC = () => {
       </div>
       
       <div className="relative w-full px-6 lg:px-20 overflow-x-auto pb-20 lg:pb-40 no-scrollbar">
-        <div className="flex items-start min-w-[1200px] lg:min-w-[1400px] relative py-16 lg:py-24 h-[550px]">
+        <div className="flex items-start min-w-[1200px] lg:min-w-[1400px] relative py-16 lg:py-24 h-[650px]">
           
-          {/* Curved connecting line */}
-          <div className="absolute top-[50px] sm:top-[70px] left-[10%] w-[80%] h-full z-0 pointer-events-none">
+          {/* Curved connecting S-curve line */}
+          <div className="absolute top-[50px] sm:top-[70px] left-[10%] w-[80%] h-[300px] z-0 pointer-events-none">
              <svg width="100%" height="100%" viewBox="0 0 1000 300" preserveAspectRatio="none" className="overflow-visible">
-                <path d="M 0,0 C 250,40 500,120 750,200 C 850,230 950,260 1000,280" fill="none" stroke="rgba(168,168,168,0.3)" strokeWidth="2" strokeDasharray="10 10" />
-                <path ref={progressRef} d="M 0,0 C 250,40 500,120 750,200 C 850,230 950,260 1000,280" fill="none" stroke="#D4A017" strokeWidth="4" />
+                <path d="M 0,150 C 125,150 125,0 250,0 C 375,0 375,150 500,150 C 625,150 625,300 750,300 C 875,300 875,150 1000,150" fill="none" stroke="rgba(168,168,168,0.3)" strokeWidth="2" strokeDasharray="10 10" />
+                <path ref={progressRef} d="M 0,150 C 125,150 125,0 250,0 C 375,0 375,150 500,150 C 625,150 625,300 750,300 C 875,300 875,150 1000,150" fill="none" stroke="#D4A017" strokeWidth="4" />
              </svg>
           </div>
           

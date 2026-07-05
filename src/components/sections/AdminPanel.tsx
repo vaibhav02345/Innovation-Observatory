@@ -12,6 +12,9 @@ interface JoinRequest {
 
 const AdminPanel = () => {
   const [requests, setRequests] = useState<JoinRequest[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchRequests = () => {
@@ -34,6 +37,49 @@ const AdminPanel = () => {
       setRequests([]);
     }
   };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'admin2026') {
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('Incorrect password');
+      setPassword('');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 font-inter">
+        <div className="max-w-md w-full bg-surface border border-text-secondary/20 p-8">
+          <h1 className="text-2xl text-accent font-bold uppercase tracking-widest mb-6 text-center">Admin Access</h1>
+          <form onSubmit={handleLogin} className="flex flex-col space-y-4">
+            <div>
+              <input 
+                type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Password" 
+                className="w-full bg-background border border-text-secondary/20 p-3 text-sm text-white focus:outline-none focus:border-accent transition-colors"
+                autoFocus
+              />
+            </div>
+            {error && <p className="text-red-500 text-xs">{error}</p>}
+            <button 
+              type="submit" 
+              className="bg-accent text-black px-8 py-3 uppercase font-bold text-xs tracking-widest hover:bg-white transition-colors"
+            >
+              Login
+            </button>
+          </form>
+          <div className="mt-6 text-center">
+             <a href="/" className="text-text-secondary hover:text-white text-xs transition-colors">← Back to Site</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 md:p-10 bg-background min-h-screen text-white font-inter">
