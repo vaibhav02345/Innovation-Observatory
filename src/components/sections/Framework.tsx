@@ -99,8 +99,8 @@ const Framework: React.FC = () => {
         {/* Desktop Vertical S-Curve SVG */}
         <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none hidden md:block">
            <svg width="100%" height="100%" viewBox="0 0 1000 1200" preserveAspectRatio="none" className="overflow-visible">
-              <path d="M 400,60 C 500,150 200,200 200,324 C 200,450 600,450 600,600 C 600,750 200,750 200,876 C 200,1000 400,1050 400,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
-              <path ref={progressLineRef} d="M 400,60 C 500,150 200,200 200,324 C 200,450 600,450 600,600 C 600,750 200,750 200,876 C 200,1000 400,1050 400,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
+              <path d="M 700,60 C 600,150 300,200 300,324 C 300,450 700,450 700,600 C 700,750 300,750 300,876 C 300,1000 700,1050 700,1140" fill="none" stroke="rgba(168,168,168,0.15)" strokeWidth="4" strokeDasharray="10 10" />
+              <path ref={progressLineRef} d="M 700,60 C 600,150 300,200 300,324 C 300,450 700,450 700,600 C 700,750 300,750 300,876 C 300,1000 700,1050 700,1140" fill="none" stroke="#D4A017" strokeWidth="6" strokeLinecap="round" />
            </svg>
         </div>
         
@@ -113,22 +113,24 @@ const Framework: React.FC = () => {
           {steps.map((step, i) => {
             const Icon = step.icon;
             
-            // These positions exactly match the SVG curve control points:
-            // X: 40%, 20%, 60%, 20%, 40%
+            // X: 70%, 30%, 70%, 30%, 70%
             // Y: 5%, 27%, 50%, 73%, 95%
             const desktopPositions = [
-              "md:left-[40%] md:top-[5%]",
-              "md:left-[20%] md:top-[27%]",
-              "md:left-[60%] md:top-[50%]",
-              "md:left-[20%] md:top-[73%]",
-              "md:left-[40%] md:top-[95%]"
+              "md:left-[70%] md:top-[5%]",
+              "md:left-[30%] md:top-[27%]",
+              "md:left-[70%] md:top-[50%]",
+              "md:left-[30%] md:top-[73%]",
+              "md:left-[70%] md:top-[95%]"
             ];
+            
+            // For nodes at 30%, text is on right. For nodes at 70%, text is on left.
+            const isTextOnRight = i % 2 !== 0;
 
             return (
               <div 
                 key={i}
                 ref={el => nodesRef.current[i] = el}
-                className={`flex items-center transition-all w-full md:absolute md:-translate-x-1/2 md:-translate-y-1/2 flex-row ${desktopPositions[i]}`}
+                className={`flex items-center transition-all w-full md:absolute md:-translate-x-1/2 md:-translate-y-1/2 flex-row ${desktopPositions[i]} ${isTextOnRight ? 'md:flex-row' : 'md:flex-row-reverse'}`}
               >
                 {/* Mobile specific Number Node (hidden on desktop) */}
                 <div className="md:hidden node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[40px] h-[40px] flex items-center justify-center bg-background z-20 transition-colors duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] mr-6">
@@ -149,21 +151,31 @@ const Framework: React.FC = () => {
                   </div>
                   
                   {/* Desktop Number floating above icon */}
-                  <div className="hidden md:flex absolute -top-4 -left-4 node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[40px] h-[40px] items-center justify-center bg-background z-30 transition-colors duration-500">
+                  <div className={`hidden md:flex absolute -top-4 ${isTextOnRight ? '-left-4' : '-right-4'} node-num text-accent font-mono text-sm font-bold border-2 border-accent rounded-full min-w-[40px] h-[40px] items-center justify-center bg-background z-30 transition-colors duration-500`}>
                     {i+1}
                   </div>
                 </div>
 
-                {/* Text (Always to the right of the node, as requested in sketch) */}
-                <div className="flex w-full md:w-[350px] justify-start pl-6 md:pl-8">
-                  <div className="flex flex-col text-left">
+                {/* Text Layout (points inward toward center to avoid intersecting line) */}
+                <div className={`flex w-full md:w-[400px] ${isTextOnRight ? 'justify-start pl-6 md:pl-8' : 'justify-end pr-6 md:pr-8 hidden md:flex'}`}>
+                  <div className={`flex flex-col ${isTextOnRight ? 'text-left' : 'text-right'}`}>
                     <span className="text-xl md:text-3xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
                       {step.title}
                     </span>
-                    <span className="text-sm md:text-base text-text-secondary font-inter leading-relaxed max-w-sm mr-auto">
+                    <span className={`text-sm md:text-base text-text-secondary font-inter leading-relaxed max-w-sm ${isTextOnRight ? 'mr-auto' : 'ml-auto'}`}>
                       {step.sub}
                     </span>
                   </div>
+                </div>
+                
+                {/* Mobile Text (hidden on Desktop) */}
+                <div className="flex flex-col md:hidden w-full ml-6">
+                  <span className="text-xl font-satoshi font-bold uppercase mb-2 tracking-widest text-text-primary">
+                    {step.title}
+                  </span>
+                  <span className="text-sm text-text-secondary font-inter leading-relaxed">
+                    {step.sub}
+                  </span>
                 </div>
 
               </div>
