@@ -1,0 +1,23 @@
+<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="cut-mask">
+      <rect width="200" height="120" fill="white" />
+      <line x1="90" y1="110" x2="170" y2="30" stroke="black" stroke-width="16" stroke-linecap="round" />
+    </mask>
+  </defs>
+
+  <!-- Sparkle -->
+  <path d="M47 15 Q50 15 50 5 Q50 15 53 15 Q50 15 50 25 Q50 15 47 15 Z" fill="#D4A017" />
+  
+  <!-- I -->
+  <text x="50" y="105" font-family="Georgia, 'Times New Roman', serif" font-size="100" fill="#F5F5F5" text-anchor="middle">I</text>
+  
+  <!-- O with mask applied -->
+  <circle cx="130" cy="70" r="32" stroke="#F5F5F5" stroke-width="12" fill="none" mask="url(#cut-mask)" />
+  
+  <!-- Diagonal Line -->
+  <line x1="90" y1="110" x2="170" y2="30" stroke="#D4A017" stroke-width="6" stroke-linecap="round" />
+  
+  <!-- End Dot -->
+  <circle cx="178" cy="22" r="5" fill="#D4A017" />
+</svg>
