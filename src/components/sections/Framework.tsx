@@ -61,7 +61,7 @@ const Framework: React.FC = () => {
       );
     }
 
-    nodesRef.current.forEach((node, index) => {
+    nodesRef.current.forEach((node) => {
       if (node) {
         ScrollTrigger.create({
           trigger: node,
