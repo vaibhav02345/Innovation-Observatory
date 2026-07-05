@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-background: #0B0B0D;
+  --color-surface: #151515;
+  --color-accent: #D4A017;
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A8A8A8;
+  --color-grid: rgba(168, 168, 168, 0.2);
+}
+
+@layer base {
+  @import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900,400,500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --color-bg: #0B0B0D;
+    --color-surface: #151515;
+    --color-accent: #D4A017;
+    --color-text: #F5F5F5;
+    --color-grid: rgba(168, 168, 168, 0.2);
+  }
+
+  body {
+    @apply bg-background text-text-primary font-inter antialiased overflow-x-hidden;
+  }
+
+  * {
+    @apply border-grid;
+  }
+
+  /* Selection style */
+  ::selection {
+    @apply bg-accent text-black;
+  }
+}
+
+@layer utilities {
+  .swiss-grid-lines {
+    background-image: 
+        linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+    background-size: 100px 100px;
+    background-position: 0 0;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
