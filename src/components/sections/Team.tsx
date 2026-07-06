@@ -2,7 +2,7 @@ import React from 'react';
 
 const members = [
   { name: "Vaibhav Pathak", role: "Core Team", emoji: "👨‍💻" },
-  { name: "Akshat", role: "Core Team", emoji: "👨‍💻" },
+  { name: "Akshat Tiwari", role: "Core Team", emoji: "👨‍💻" },
   { name: "Lovelesh Pathak", role: "Core Team", emoji: "👨‍💻" },
   { name: "Madhav Dixit", role: "Core Team", emoji: "👨‍💻" },
   { name: "Agrim Goel", role: "Core Team", emoji: "👨‍💻" },
@@ -10,6 +10,7 @@ const members = [
   { name: "Harsh Gupta", role: "Core Team", emoji: "👨‍💻" },
   { name: "Soumya Srivastava", role: "Core Team", emoji: "👩‍💻" },
   { name: "Aarohi Gupta", role: "Core Team", emoji: "👩‍💻" },
+  { name: "Yatharth Kaushik", role: "Core Team", emoji: "👩‍💻" },
 ];
 
 const Team: React.FC = () => {
