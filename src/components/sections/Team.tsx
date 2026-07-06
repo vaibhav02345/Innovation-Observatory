@@ -10,7 +10,7 @@ const members = [
   { name: "Harsh Gupta", role: "Core Team", emoji: "👨‍💻" },
   { name: "Soumya Srivastava", role: "Core Team", emoji: "👩‍💻" },
   { name: "Aarohi Gupta", role: "Core Team", emoji: "👩‍💻" },
-  { name: "Yatharth Kaushik", role: "Core Team", emoji: "👩‍💻" },
+  { name: "Yatharth Kaushik", role: "Core Team", emoji: "👨‍💻" },
 ];
 
 const Team: React.FC = () => {
