@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Compass } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,6 +7,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Typing effect for "Innovation"
+  const word = 'Innovation';
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (!isDeleting && displayText === word) {
+      // Finished typing — pause 2s then start deleting
+      const pause = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(pause);
+    }
+
+    if (isDeleting && displayText === '') {
+      // Finished deleting — pause 500ms then start typing
+      const pause = setTimeout(() => setIsDeleting(false), 500);
+      return () => clearTimeout(pause);
+    }
+
+    const speed = isDeleting ? 80 : 130;
+    const timeout = setTimeout(() => {
+      setDisplayText(prev =>
+        isDeleting
+          ? word.slice(0, prev.length - 1)
+          : word.slice(0, prev.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting]);
 
   useEffect(() => {
     const heroTl = gsap.timeline();
@@ -45,7 +75,10 @@ const Hero: React.FC = () => {
             Where<br />
             <span className="text-accent">Observation</span><br />
             Meets<br />
-            Innovation
+            <span className="inline-flex items-baseline">
+              {displayText}
+              <span className="inline-block w-[3px] sm:w-[4px] lg:w-[6px] h-[0.85em] bg-accent ml-1 animate-[blink_1s_step-end_infinite]" />
+            </span>
           </h1>
           <div className="max-w-xl">
             <p className="text-sm sm:text-base lg:text-lg text-text-secondary text-gray-400 leading-relaxed mb-8 sm:mb-10 font-inter">
