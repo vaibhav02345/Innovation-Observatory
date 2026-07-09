@@ -14,9 +14,6 @@
 }
 
 @layer base {
-  @import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900,400,500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
   :root {
     --color-bg: #0B0B0D;
     --color-surface: #151515;
