@@ -7,6 +7,37 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const compassRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const jumpRandomly = () => {
+        if (!compassRef.current) return;
+        
+        // Randomly pick a point within a circle (radius approx 60px to stay in bounds)
+        const radius = 60;
+        const angle = gsap.utils.random(0, Math.PI * 2);
+        const r = gsap.utils.random(20, radius); // Keep it moving away from center slightly
+        const x = r * Math.cos(angle);
+        const y = r * Math.sin(angle);
+        const rotation = gsap.utils.random(-180, 180);
+        
+        gsap.to(compassRef.current, {
+          x,
+          y,
+          rotation,
+          duration: gsap.utils.random(0.3, 0.7),
+          ease: "power2.inOut",
+          delay: gsap.utils.random(0.1, 0.5),
+          onComplete: jumpRandomly
+        });
+      };
+      
+      jumpRandomly();
+    });
+    
+    return () => ctx.revert();
+  }, []);
 
   // Typing effect for "Innovation"
   const word = 'Innovation';
@@ -85,17 +116,17 @@ const Hero: React.FC = () => {
               We don't teach students what to build. We teach them how to discover what deserves to be built through systematic observation and critical inquiry.
             </p>
             <div className="grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi">01</span>
-                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1">Foundational Inquiry</span>
+              <div className="flex flex-col group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi group-hover:text-accent transition-colors duration-300">01</span>
+                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1 group-hover:text-white transition-colors duration-300">Foundational Inquiry</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi">02</span>
-                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1">Problem Synthesis</span>
+              <div className="flex flex-col group cursor-pointer hover:-translate-y-1 transition-transform duration-300 delay-75">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi group-hover:text-accent transition-colors duration-300">02</span>
+                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1 group-hover:text-white transition-colors duration-300">Problem Synthesis</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi">03</span>
-                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1">Impact Validation</span>
+              <div className="flex flex-col group cursor-pointer hover:-translate-y-1 transition-transform duration-300 delay-150">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold font-satoshi group-hover:text-accent transition-colors duration-300">03</span>
+                <span className="text-[7px] sm:text-[8px] lg:text-[9px] uppercase tracking-widest text-text-secondary mt-1 group-hover:text-white transition-colors duration-300">Impact Validation</span>
               </div>
             </div>
           </div>
@@ -114,7 +145,7 @@ const Hero: React.FC = () => {
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-48 h-48 sm:w-64 sm:h-64 border border-accent/30 rounded-full animate-[spin_20s_linear_infinite] relative"></div>
-              <Compass className="absolute text-accent w-16 h-16 opacity-80" strokeWidth={1.5} />
+              <Compass ref={compassRef} className="absolute text-accent w-16 h-16 opacity-80 cursor-pointer" strokeWidth={1.5} />
               <div className="absolute mt-28 sm:mt-32 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-mono text-accent/80 text-center max-w-[140px]">Providing direction to people, ideas & thinking</div>
               <div className="absolute bottom-[-60px] sm:bottom-[-100px] flex flex-col items-center">
                 <div className="text-[9px] uppercase tracking-[0.3em] font-mono text-text-secondary mb-4">Scroll to Observe</div>
