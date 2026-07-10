@@ -14,13 +14,6 @@
 }
 
 @layer base {
-  :root {
-    --color-bg: #0B0B0D;
-    --color-surface: #151515;
-    --color-accent: #D4A017;
-    --color-text: #F5F5F5;
-    --color-grid: rgba(168, 168, 168, 0.2);
-  }
 
   body {
     @apply bg-background text-text-primary font-inter antialiased overflow-x-hidden;
